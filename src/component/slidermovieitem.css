@@ -1,0 +1,66 @@
+.slider__movie__item {
+  display: flex;
+  flex-direction: column;
+  /* gap: 10px; */
+  border-radius: 30px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  /* width: calc(20% - 10px); */
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  /* border: 2px solid yellow; */
+  transition: transform 0.2s ease-out;
+}
+.slider__movie__item:hover {
+  transform: scale(1.05); /* 호버 시 약간 크기 확대 */
+}
+
+.slider__movie__item:hover .slider__movie__item__info {
+  display: flex;
+  font-size: 12px;
+  gap: 2px;
+  /* font-weight: 600; */
+  background-color: darkgray;
+background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  bottom: 0;
+  flex-direction: column;
+  /* height: 0; */
+  justify-content: flex-start;
+  left: 0;
+  margin: 0;
+  padding: 6px 6px 10px 6px;
+  position: absolute;
+  transition: height 0.4s ease-in;
+  width: 100%;
+  /* opacity: 1; */
+    display: flex;
+  opacity: 1; /* 호버될 때 투명도를 1로 설정하여 나타나게 함 */
+  transform: translateY(0);
+}
+
+.slider__movie__item__image {
+  padding: 5px;
+  border-radius: 25px;
+  width: 180px;
+  height: 255px; 
+}
+
+.slider__movie__item__title{
+  padding-left: 5px;
+}
+
+.slider__movie__item__info {
+  display: none;
+   transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transform: translateY(100%);
+  opacity: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.slider__movie__item__info > div {
+  padding: 0px 5px 0px;
+}
