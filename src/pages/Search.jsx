@@ -1,8 +1,8 @@
 // import MovieList from '../component/MovieList'
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom'
-import MovieItem from "../component/MovieItem";
-import Loading from "../component/Loading";
+import { useParams } from "react-router-dom";
+import MovieItem from "../component/common/MovieItem";
+import Loading from "../component/common/Loading";
 
 export default function Search() {
   //파라미터 설정, searchTerm으로 파라미터 접근
@@ -19,22 +19,20 @@ export default function Search() {
       .then((result) => {
         setSearchList(result);
         console.log(searchList);
-        const filteredMovies = result.data.filter((movie) =>  movie.title.includes(searchTerm)
+        const filteredMovies = result.data.filter((movie) =>
+          movie.title.includes(searchTerm)
         );
         setFilteredSearchList(filteredMovies);
-        console.log(filteredSearchList)
+        console.log(filteredSearchList);
       })
-      
+
       //오류처리
       .catch((e) => console.log(e));
   }, [searchTerm]);
   //searchTerm 값이 변경될 때마다 fetch함수가 실행되도록 useEffect를 설정
 
-
   if (filteredSearchList === null) {
-    return (
-      <Loading />
-    )
+    return <Loading />;
   } else if (Object.keys(searchList.data).length === 0) {
     return (
       <div>
@@ -43,25 +41,20 @@ export default function Search() {
           {`'${searchTerm}'(으)로 검색한 결과가 없습니다.`}
         </div>
       </div>
-    )
-  }
-  else {
+    );
+  } else {
     return (
       <div>
         <div className="movie__search__result">{`'${searchTerm}' (으)로 검색한 결과입니다.`}</div>
         <div className="movie__searches">
-
           {filteredSearchList.map((movie) => (
             <MovieItem key={movie.id} movie={movie} />
           ))}
         </div>
       </div>
-    )
+    );
   }
-
 }
-
-
 
 /* 
 1. 페이지 파라미터
