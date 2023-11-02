@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import MovieItem from "../component/common/MovieItem";
 import Loading from "../component/common/Loading";
+import "../style/search.css";
 
 export default function Search() {
   //파라미터 설정, searchTerm으로 파라미터 접근

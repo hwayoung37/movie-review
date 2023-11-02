@@ -1,0 +1,45 @@
+.movieList {
+  margin-top: 10px;
+  margin-bottom: 50px;
+  /* padding: 20px; */
+}
+
+.movieList_content {
+  /* display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between; */
+  /* border: 2px solid yellow; */
+  /* margin: px; */
+
+  /* 그리드 */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+.movieList__content_slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+.movieList__content__slider__related {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 1300px;
+}
+
+.movieList__slider {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  transition: transform 0.5s ease-in-out; /* 슬라이딩 효과를 위한 트랜지션 설정 */
+  gap: 7px;
+  margin-right: 2px;
+}

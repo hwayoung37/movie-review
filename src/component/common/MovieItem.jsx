@@ -1,5 +1,6 @@
 // import dummyData from '../static/dummyData.json'
 import { Link } from "react-router-dom";
+import "../../style/common/movieItem.css";
 
 export default function MovieItem({ movie }) {
   // const movie = dummyData.data[0]

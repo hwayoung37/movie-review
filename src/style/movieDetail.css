@@ -1,0 +1,246 @@
+.team {
+  font-weight: 900;
+}
+
+.rights {
+  margin-top: 10px;
+}
+
+.MovieDetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a118a;
+  width: 280px;
+  height: 70px;
+  line-height: 30px;
+  /* 최상단 위치 */
+  z-index: 90;
+  /* 중앙 배치 */
+  /* top, bottom, left, right 는 브라우저 기준으로 작동한다. */
+  /* translate는 본인의 크기 기준으로 작동한다. */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+/* 애니메이션 주면 깜빡거림... */
+.modal.show {
+  opacity: 1;
+  /* animation: fade 1s forwards; */
+}
+
+.modal.hide {
+  opacity: 0;
+  /* animation: fade-out 1s forwards; */
+}
+
+/* MovieInfo 컴퍼넌트 CSS*/
+.movieInfo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 50px 0;
+  margin: 0 50px;
+  /* overflow: hidden; */
+  /* background-color: pink; */
+  /* background-image: url('https://cdn.pixabay.com/photo/2019/02/27/02/22/theater-4023278_1280.jpg');
+  background-size: cover;
+  filter: blur(20px); */
+}
+.movieInfo_bg_wrapper {
+  position: absolute;
+  left: -50px;
+  width: 120%;
+  height: 120%;
+  overflow: hidden;
+  filter: blur(5px);
+}
+.movieInfo__bg {
+  width: 1400px;
+  height: 525px;
+  background-size: cover;
+  position: absolute;
+  opacity: 0.4;
+  filter: blur(20px) brightness(0.8);
+}
+
+.movieInfo__title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  border-bottom: 1px solid white;
+  padding: 0 5px;
+  margin-bottom: 10px;
+}
+
+.movieInfo__title .title {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+.movieInfo__content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 80px;
+  padding: 0 30px;
+  margin-top: 60px;
+  z-index: 10;
+}
+.movieInfo__content__poster {
+  margin-top: 30px;
+}
+.movieInfo__img {
+  width: 250px;
+}
+
+.movieInfo__emoticon {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 20px;
+  font-size: 24px;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.movieInfo__align {
+  display: flex;
+  flex-direction: row;
+  padding: 0px 5px;
+  /* justify-content: space-between; */
+  /* align-items: flex-end; */
+}
+
+.movieInfo__align > div:first-child {
+  flex-basis: 12.5%; /* 1/8 */
+  max-width: 12.5%; /* 1/8 */
+}
+
+.movieInfo__align__staff {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 5px;
+  /* justify-content: space-between; */
+  /* gap: 40px; */
+}
+
+.movieInfo__content__detail {
+  /* padding: 5px;  */
+  z-index: 10;
+}
+
+.movieInfo__content__detail > div {
+}
+
+.movieInfo__content__detail > div > h3 {
+  /* padding: 5px 0px; */
+}
+
+.movieInfo__content__detail > div > div {
+  padding: 15px 0px 15px 5px;
+}
+
+.movieInfo__content__staff,
+.movieInfo__content__genres {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 80%;
+}
+
+.movieInfo__content__plot {
+  display: block;
+  padding: 30px 10px 50px 10px;
+  margin-top: 40px;
+  z-index: 10;
+  font-size: large;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  /* font-weight: 100; */
+}
+
+.movieInfo__content__plot > h3 {
+  padding-bottom: 10px;
+}
+
+.movieInfo__content__plot > div {
+  /* padding: 8px; */
+  margin-top: 16px;
+  word-break: break-all;
+  line-height: 25px;
+}
+
+.movie__info {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  left: 60px;
+  bottom: 80px;
+  color: white;
+  width: 80%;
+}
+.movie__info-image {
+  width: 200px;
+  border-radius: 10px;
+}
+
+.movie__info-text {
+  position: absolute;
+  left: 250px;
+  bottom: 6%;
+  /* gap: 70px;   */
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a118a;
+  width: 280px;
+  height: 70px;
+  line-height: 30px;
+  /* 최상단 위치 */
+  z-index: 90;
+  /* 중앙 배치 */
+  /* top, bottom, left, right 는 브라우저 기준으로 작동한다. */
+  /* translate는 본인의 크기 기준으로 작동한다. */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+/* 애니메이션 주면 깜빡거림... */
+.modal.show {
+  opacity: 1;
+  /* animation: fade 1s forwards; */
+}
+
+.modal.hide {
+  opacity: 0;
+  /* animation: fade-out 1s forwards; */
+}

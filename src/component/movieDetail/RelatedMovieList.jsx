@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SliderMovieItem from "../common/SliderMovieItem";
 import Loading from "../common/Loading";
+import "../../style/common/slider.css";
 
 export default function RelatedMovieList() {
   //movielist 설정 및 초기화

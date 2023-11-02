@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // import '../../App.css'; // Banner 컴포넌트에 대한 스타일 파일
 import { Link } from "react-router-dom";
 // import Loading from "./Loading";
+import "../../style/banner.css";
 
 export default function Banner() {
   const [data, setData] = useState(null);

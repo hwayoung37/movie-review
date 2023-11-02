@@ -2,6 +2,7 @@
 // import dummyData from '../static/dummyData.json'
 import { useState, useEffect } from "react";
 import SliderMovieItem from "../common/SliderMovieItem";
+import "../../style/common/slider.css";
 
 export default function MovieGenresList({ genreIds, categoryTitle }) {
   //movielist 설정 및 초기화

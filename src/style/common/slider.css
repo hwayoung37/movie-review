@@ -1,0 +1,21 @@
+.slider__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.slider__btn {
+  background-color: #010226;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  width: 50px;
+  height: 40px;
+  font-size: 30px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  opacity: 0.3;
+}
+.slider__btn:hover {
+  opacity: 1;
+}

@@ -1,6 +1,7 @@
-import MovieInfo from "../component/common/MovieInfo";
+import MovieInfo from "../component/movieDetail/MovieInfo";
 import Comment from "../component/movieDetail/Comment";
 import RelatedMovieList from "../component/movieDetail/RelatedMovieList";
+import "../style/movieDetail.css";
 
 export default function MovieDetail() {
   {
