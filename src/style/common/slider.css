@@ -19,3 +19,7 @@
 .slider__btn:hover {
   opacity: 1;
 }
+
+.fa-solid fa-arrow-right {
+  display: flex;
+}

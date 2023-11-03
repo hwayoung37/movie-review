@@ -3,6 +3,12 @@
 import { useState, useEffect } from "react";
 import SliderMovieItem from "../common/SliderMovieItem";
 import "../../style/common/slider.css";
+import "../../style/common/movieList.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function MovieGenresList({ genreIds, categoryTitle }) {
   //movielist 설정 및 초기화
@@ -43,7 +49,7 @@ export default function MovieGenresList({ genreIds, categoryTitle }) {
             onClick={handlePrevClick}
             disabled={currentIndex === 0}
           >
-            <i class="fa-solid fa-arrow-left"></i>
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <div className="movieList__content_slider">
             <div
@@ -60,7 +66,7 @@ export default function MovieGenresList({ genreIds, categoryTitle }) {
             onClick={handleNextClick}
             disabled={currentIndex === movieList.data.length - 7}
           >
-            <i class="fa-solid fa-arrow-right"></i>
+            <FontAwesomeIcon icon={faChevronRight} />
           </button>
         </div>
       </div>

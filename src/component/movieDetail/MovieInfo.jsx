@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../common/Loading";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart as farHeart,
+  faBookmark as farBookmark,
+} from "@fortawesome/free-regular-svg-icons"; // regular 스타일 아이콘 가져오기
 
 export default function MovieInfo() {
   const [heart, setHeart] = useState(false);
@@ -79,16 +85,16 @@ export default function MovieInfo() {
             <div className="movieInfo__emoticon">
               <div onClick={heartHandler} className="icon">
                 {heart ? (
-                  <i class="fa-solid fa-heart" />
+                  <FontAwesomeIcon icon={faHeart} />
                 ) : (
-                  <i className="fa-regular fa-heart" />
+                  <FontAwesomeIcon icon={farHeart} />
                 )}
               </div>
               <div onClick={bookmarkHandler} className="icon">
                 {bookmark === false ? (
-                  <i className="fa-regular fa-bookmark" />
+                  <FontAwesomeIcon icon={farBookmark} />
                 ) : (
-                  <i class="fa-solid fa-bookmark" />
+                  <FontAwesomeIcon icon={faBookmark} />
                 )}
               </div>
             </div>

@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "../style/header.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 // 로고, 검색창, 로그인, 회원가입
 export default function Header() {
@@ -52,7 +54,7 @@ export default function Header() {
       {/* 로고 */}
       <div>
         <Link to="/">
-          <img src="../../public/팀4로고1.png" className="header__logo" />
+          <img src="/logo.png" className="header__logo" />
         </Link>
       </div>
       <div className="header__category">
@@ -75,7 +77,7 @@ export default function Header() {
             type="submit"
             className="header_search_btn"
           >
-            <i className="fa-solid fa-magnifying-glass icon" />
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
           </Link>
         </form>
 

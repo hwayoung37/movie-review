@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import MovieItem from "../component/common/MovieItem";
 import Loading from "../component/common/Loading";
 import "../style/search.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGhost } from "@fortawesome/free-solid-svg-icons";
 
 export default function Search() {
   //파라미터 설정, searchTerm으로 파라미터 접근
@@ -38,8 +40,8 @@ export default function Search() {
     return (
       <div>
         <div className="movie__notSearche">
-          <i class="fa-regular fa-circle-xmark fa-lg movie__notSearche-icon " />
-          {`'${searchTerm}'(으)로 검색한 결과가 없습니다.`}
+          <FontAwesomeIcon icon={faGhost} />
+          {` '${searchTerm}'(으)로 검색한 결과가 없습니다.`}
         </div>
       </div>
     );

@@ -5,6 +5,11 @@ import { useParams } from "react-router-dom";
 import SliderMovieItem from "../common/SliderMovieItem";
 import Loading from "../common/Loading";
 import "../../style/common/slider.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function RelatedMovieList() {
   //movielist 설정 및 초기화
@@ -52,7 +57,7 @@ export default function RelatedMovieList() {
             onClick={handlePrevClick}
             disabled={currentIndex === 0}
           >
-            <i class="fa-solid fa-arrow-left"></i>
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <div className="movieList__content__slider__related">
             <div
@@ -69,7 +74,7 @@ export default function RelatedMovieList() {
             onClick={handleNextClick}
             disabled={currentIndex === movieList.length - 7}
           >
-            <i class="fa-solid fa-arrow-right"></i>
+            <FontAwesomeIcon icon={faChevronRight} />
           </button>
         </div>
       </div>
