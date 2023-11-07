@@ -1,8 +1,6 @@
 import "./App.css";
 import "./Login.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import MovieItem from "./component/MovieItem";
-// import MovieList from "./component/MovieList";
 import Header from "./component/Header";
 import Footer from "./component/Footer";
 import MyPage from "./pages/MyPage";
@@ -14,12 +12,15 @@ import MovieDetail from "./pages/MovieDetail";
 import Search from "./pages/Search";
 import Signup from "./pages/Signup";
 
+import ScrollToTop from "./utils/ScrollToTop";
+
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
+      {/* 컴포넌트이기때문에 열린태그/닫힘태그 사용안됨 */}
       <div className="app">
         <Header />
-
         <main className="main">
           <Routes>
             <Route path="/" element={<Home />} />
