@@ -19,8 +19,8 @@ export default function Home() {
         categoryTitle="화면을 불태우다. 폭발적인 액션, 잊지 못할 기억"
       />
       <MovieGenresList
-        genreIds="32a37731-41f5-46b6-b1be-d7eefe9e15fa"
-        categoryTitle="웃음이 터진다: 코미디의 경계 없는 매력"
+        genreIds="2532a966-9d5c-4586-af3b-f3ab83c935a9"
+        categoryTitle="웃음이 터진다: 뮤지컬의 경계 없는 매력"
       />
       <MovieGenresList
         genreIds="f1d79c81-3165-4971-ad18-833c042b3f24"
