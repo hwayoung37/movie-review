@@ -9,31 +9,36 @@ import {
 } from "@fortawesome/free-regular-svg-icons"; // regular 스타일 아이콘 가져오기
 
 export default function MovieInfo() {
+  const params = useParams();
+  const [movieDetail, setMovieDetail] = useState(null);
   const [heart, setHeart] = useState(false);
+  const [bookmark, setBookmark] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // 로딩 상태 추가
+
   const heartHandler = () => {
-    console.log("클릭");
     setHeart(!heart);
   };
-  const [bookmark, setBookmark] = useState(false);
   const bookmarkHandler = () => {
-    console.log("클릭");
     setBookmark(!bookmark);
   };
 
-  const params = useParams();
-  const [movieDetail, setMovieDetail] = useState(null);
   const DETAIL_API = `https://moviestates-alternative.codestates-seb.link/movies/${params.movieId}/detail`;
-  //중복되는 fetch부분 따로 뺴서 한꺼번에 ㄱㄴ하도록 고려해볼 것 -> promise.all promise.allsettled
+
   useEffect(() => {
+    setIsLoading(true); // 데이터 가져오기 시작 시 로딩 상태 설정
+
     fetch(DETAIL_API)
       .then((res) => res.json())
       .then((result) => {
         setMovieDetail(result);
       })
-      .catch((e) => console.log(e));
-  }, []);
-  //서버 에러시 연결되는 페이지 구현
+      .catch((e) => console.log(e))
+      .finally(() => {
+        setIsLoading(false); // 데이터 가져오기 완료 시 로딩 상태 해제
+      });
+  }, [params.movieId]);
 
+  //분을 시간과 분으로 나누는 함수
   function convertMinutesToHoursAndMinutes(minutes) {
     if (minutes === null) {
       return "입력된 값이 없습니다.";
@@ -63,7 +68,7 @@ export default function MovieInfo() {
     } else {
       return "0분";
     }
-  } // 분을 시간,분으로 나누는 함수
+  }
 
   if (movieDetail === null) {
     return <Loading />;
@@ -72,88 +77,90 @@ export default function MovieInfo() {
 
     return (
       <div className="movieInfo">
-        <div className="movieInfo_bg_wrapper">
-          <img
-            className="movieInfo__bg"
-            src={movieDetail.postImage}
-            alt="Movie Banner"
-          />
-        </div>
-        <section className="movieInfo__content">
-          <div className="movieInfo__content__poster">
-            <img className="movieInfo__img" src={movieDetail.postImage} />
-            <div className="movieInfo__emoticon">
-              <div onClick={heartHandler} className="icon">
-                {heart ? (
-                  <FontAwesomeIcon icon={faHeart} />
-                ) : (
-                  <FontAwesomeIcon icon={farHeart} />
-                )}
-              </div>
-              <div onClick={bookmarkHandler} className="icon">
-                {bookmark === false ? (
-                  <FontAwesomeIcon icon={farBookmark} />
-                ) : (
-                  <FontAwesomeIcon icon={faBookmark} />
-                )}
-              </div>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <div className="movieInfo_bg_wrapper">
+              <img
+                className="movieInfo__bg"
+                src={movieDetail.postImage}
+                alt="Movie Banner"
+              />
             </div>
-          </div>
-          <div className="movieInfo__content__detail">
-            <div className="movieInfo__title">
-              <div className="title"> {movieDetail.title} </div>
-              {movieDetail.averageScore === null ? (
-                <div>평가된 평점이 없습니다.</div>
-              ) : (
-                <h3>⭐ {movieDetail.averageScore.toFixed(1)}</h3>
-              )}
-            </div>
-            <div className="movieInfo__align">
-              <div className="movieInfo__category__title">개봉일</div>
-              <div>
-                {movieDate === null
-                  ? "개봉일 정보가 없습니다."
-                  : `${movieDate.slice(0, 4)}-${movieDate.slice(
-                      4,
-                      6
-                    )}-${movieDate.slice(6, 8)}`}
-              </div>
-            </div>
-            <div className="movieInfo__align">
-              <div>상영시간</div>
-              <div>{convertMinutesToHoursAndMinutes(movieDetail.runtime)} </div>
-            </div>
-            <div className="movieInfo__align">
-              <div>장르</div>
-              <div className="movieInfo__content__genres">
-                {movieDetail.genres.map((genre) => (
-                  <div key={genre.id}>{genre.name}</div>
-                ))}
-              </div>
-            </div>
-            <div className="movieInfo__align__staff">
-              <div>출연/제작</div>
-              <div className="movieInfo__content__staff">
-                {movieDetail.staffs.map((staff) => (
-                  <div key={staff.id}>
-                    {" "}
-                    {staff.role}: {staff.name}{" "}
+            <section className="movieInfo__content">
+              <div className="movieInfo__content__poster">
+                <img className="movieInfo__img" src={movieDetail.postImage} />
+                <div className="movieInfo__emoticon">
+                  <div onClick={heartHandler} className="icon">
+                    {heart ? (
+                      <FontAwesomeIcon icon={faHeart} />
+                    ) : (
+                      <FontAwesomeIcon icon={farHeart} />
+                    )}
                   </div>
-                ))}
+                  <div onClick={bookmarkHandler} className="icon">
+                    {bookmark === false ? (
+                      <FontAwesomeIcon icon={farBookmark} />
+                    ) : (
+                      <FontAwesomeIcon icon={faBookmark} />
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </section>
-        <section className="movieInfo__content__plot">
-          <h3>줄거리</h3>
-          <div> {movieDetail.plot} </div>
-        </section>
+              <div className="movieInfo__content__detail">
+                <div className="movieInfo__title">
+                  <div className="title"> {movieDetail.title} </div>
+                  {movieDetail.averageScore === null ? (
+                    <div>평가된 평점이 없습니다.</div>
+                  ) : (
+                    <h3>⭐ {movieDetail.averageScore.toFixed(1)}</h3>
+                  )}
+                </div>
+                <div className="movieInfo__align">
+                  <div className="movieInfo__category__title">개봉일</div>
+                  <div>
+                    {movieDate === null
+                      ? "개봉일 정보가 없습니다."
+                      : `${movieDate.slice(0, 4)}-${movieDate.slice(
+                          4,
+                          6
+                        )}-${movieDate.slice(6, 8)}`}
+                  </div>
+                </div>
+                <div className="movieInfo__align">
+                  <div>상영시간</div>
+                  <div>
+                    {convertMinutesToHoursAndMinutes(movieDetail.runtime)}{" "}
+                  </div>
+                </div>
+                <div className="movieInfo__align">
+                  <div>장르</div>
+                  <div className="movieInfo__content__genres">
+                    {movieDetail.genres.map((genre) => (
+                      <div key={genre.id}>{genre.name}</div>
+                    ))}
+                  </div>
+                </div>
+                <div className="movieInfo__align__staff">
+                  <div>출연/제작</div>
+                  <div className="movieInfo__content__staff">
+                    {movieDetail.staffs.map((staff) => (
+                      <div key={staff.id}>
+                        {staff.role}: {staff.name}{" "}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section className="movieInfo__content__plot">
+              <h3>줄거리</h3>
+              <div> {movieDetail.plot} </div>
+            </section>
+          </>
+        )}
       </div>
     );
   }
 }
-
-/* <section className='movieInfo__title'>
-          <h1> {movieDetail.title} </h1>
-           {movieDetail.averageScore === null ? <div>평가된 평점이 없습니다.</div> : <h3>⭐ {movieDetail.averageScore.toFixed(1)}</h3> } 
-        </section> */
