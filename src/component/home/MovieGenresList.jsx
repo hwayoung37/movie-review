@@ -1,8 +1,5 @@
-// import MovieItem from "./MovieItem";
-// import dummyData from '../static/dummyData.json'
 import { useState, useEffect } from "react";
-import SliderMovieItem from "../common/SliderMovieItem";
-import "../../style/common/slider.css";
+import MovieItem from "../common/MovieItem";
 import "../../style/common/movieList.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -56,8 +53,8 @@ export default function MovieGenresList({ genreIds, categoryTitle }) {
               className="movieList__slider"
               style={{ transform: `translateX(-${currentIndex * 188}px)` }}
             >
-              {movieList.data.map((movie, index) => (
-                <SliderMovieItem movie={movie} key={movie.id} />
+              {movieList.data.map((movie) => (
+                <MovieItem type={"slider"} movie={movie} key={movie.id} />
               ))}
             </div>
           </div>

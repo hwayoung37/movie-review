@@ -1,34 +1,32 @@
-.movie__item {
+.movieItem {
   display: flex;
   flex-direction: column;
-  /* border: 2px solid blue; */
-  /* flex: 1 0 20%; */
-  /* padding: 15px; */
   gap: 10px;
   border-radius: 30px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-  /* width: calc(20% - 10px); */
   width: 100%;
   position: relative;
   cursor: pointer;
-  /* border: 2px solid yellow; */
   transition: transform 0.2s ease-out;
 }
-.movie__item:hover {
+
+.movieItem .type_slider {
+  gap: none;
+}
+
+.movieItem:hover {
   transform: scale(1.05); /* 호버 시 약간 크기 확대 */
 }
 
-.movie__item:hover .movie__item__info {
+.movieItem:hover .movieItem_info {
   display: flex;
   font-size: 14px;
   gap: 2px;
-  /* font-weight: 600; */
   background-color: darkgray;
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(5px);
   bottom: 0;
   flex-direction: column;
-  /* height: 0; */
   justify-content: flex-start;
   left: 0;
   margin: 0;
@@ -36,23 +34,33 @@
   position: absolute;
   transition: height 0.4s ease-in;
   width: 100%;
-  /* opacity: 1; */
   display: flex;
   opacity: 1; /* 호버될 때 투명도를 1로 설정하여 나타나게 함 */
   transform: translateY(0);
 }
 
-.movie__item__image {
-  padding: 5px;
-  border-radius: 25px;
-  /* height:  */
+.movieItem:hover .type_slider .movieItem_info {
+  font-size: 12px;
+  color: red;
 }
 
-.movie__item__title {
+.movieItem_img {
+  padding: 5px;
+  border-radius: 25px;
+}
+
+.movieItem_img .type_slider {
+  padding: 5px;
+  border-radius: 25px;
+  width: 180px;
+  height: 255px;
+}
+
+.movieItem_title {
   padding-left: 5px;
 }
 
-.movie__item__info {
+.movieItem_info {
   display: none;
   transition: transform 0.3s ease-out, opacity 0.3s ease-out;
   transform: translateY(100%);
@@ -63,15 +71,12 @@
   width: 100%;
 }
 
-.movie__item__info > div {
+.movieItem_info > div {
   padding: 0px 5px 0px;
 }
 
-.movie__item__plot {
-}
-
-.movie__item__genre {
+.movieItem_genre {
   display: flex;
-  flex-direciton: row;
+  flex-direction: row;
   gap: 4px;
 }

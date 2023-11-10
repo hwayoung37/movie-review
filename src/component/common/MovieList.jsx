@@ -1,10 +1,11 @@
-import MovieItem from "./MovieItem";
 import { useState, useEffect } from "react";
+import MovieItem from "./MovieItem";
 import Loading from "./Loading";
 import "../../style/common/movieList.css";
 
 export default function MovieList() {
   const [movieList, setMovieList] = useState(null);
+
   const SERVER_API =
     "https://moviestates-alternative.codestates-seb.link/movies/top";
 

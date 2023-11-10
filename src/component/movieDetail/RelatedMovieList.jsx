@@ -1,8 +1,7 @@
-// import MovieItem from "./MovieItem";
-// import dummyData from '../static/dummyData.json'
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import SliderMovieItem from "../common/SliderMovieItem";
+
+import MovieItem from "../common/MovieItem";
 import Loading from "../common/Loading";
 import "../../style/common/slider.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,7 +13,6 @@ import {
 export default function RelatedMovieList() {
   //movielist 설정 및 초기화
   const [movieList, setMovieList] = useState(null);
-  // const [slicedList, setSlicedList] = useState(null);
 
   const params = useParams();
   const RELATED_API = `https://moviestates-alternative.codestates-seb.link/movies/${params.movieId}/related`;
@@ -64,8 +62,8 @@ export default function RelatedMovieList() {
               className="movieList__slider"
               style={{ transform: `translateX(-${currentIndex * 188}px)` }}
             >
-              {movieList.map((movie, index) => (
-                <SliderMovieItem movie={movie} key={movie.id} />
+              {movieList.map((movie) => (
+                <MovieItem type={"slider"} movie={movie} key={movie.id} />
               ))}
             </div>
           </div>
