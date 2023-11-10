@@ -5,13 +5,9 @@ import MovieItem from "../component/common/MovieItem";
 import Loading from "../component/common/Loading";
 import "../style/search.css";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGhost } from "@fortawesome/free-solid-svg-icons";
-
 export default function Search() {
   //파라미터 설정, searchTerm으로 파라미터 접근
   const { searchTerm } = useParams();
-  const [searchList, setSearchList] = useState(null); // 제목, 감독, 배우에서 searchTerm이 포함된 모든 영화
   const [filteredSearchList, setFilteredSearchList] = useState(null); //searchTerm이 제목에서만 포함된 영화
 
   //searchTerm으로 접근한 값을 활용해 API 갖고 오기
@@ -22,14 +18,11 @@ export default function Search() {
     fetch(SERVER_API)
       .then((response) => response.json())
       .then((result) => {
-        setSearchList(result);
-        console.log("searchList:", searchList);
         const filteredMovies = result.data.filter((movie) =>
           movie.title.includes(searchTerm)
         );
         setFilteredSearchList(filteredMovies);
       })
-
       //오류처리
       .catch((e) => console.log(e));
   }, [searchTerm]);
@@ -37,11 +30,10 @@ export default function Search() {
 
   if (filteredSearchList === null) {
     return <Loading />;
-  } else if (Object.keys(searchList.data).length === 0) {
+  } else if (Object.keys(filteredSearchList).length === 0) {
     return (
       <div>
         <div className="movie__notSearche">
-          <FontAwesomeIcon icon={faGhost} />
           {` '${searchTerm}'(으)로 검색한 결과가 없습니다.`}
         </div>
       </div>
