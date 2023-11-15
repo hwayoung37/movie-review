@@ -121,6 +121,7 @@ export default function Comment() {
             }
           />
           <select
+            className="comment_score"
             value={comments.score}
             onChange={(e) =>
               setComments({ ...comments, score: e.target.value })

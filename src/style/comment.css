@@ -47,6 +47,17 @@
   outline: none;
 }
 
+.comment_score {
+  background-color: #242547;
+  border: none;
+  color: #c2c2c2;
+  height: 40px;
+  border-radius: 10px;
+  width: 200px;
+  margin-right: 30px;
+  padding-left: 10px;
+}
+
 .commentForm__submit {
   background-color: #242547;
   color: white;
