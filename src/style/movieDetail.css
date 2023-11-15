@@ -13,39 +13,6 @@
   align-items: center;
 }
 
-.modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #0a118a;
-  width: 280px;
-  height: 70px;
-  line-height: 30px;
-  /* 최상단 위치 */
-  z-index: 90;
-  /* 중앙 배치 */
-  /* top, bottom, left, right 는 브라우저 기준으로 작동한다. */
-  /* translate는 본인의 크기 기준으로 작동한다. */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 20px;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-/* 애니메이션 주면 깜빡거림... */
-.modal.show {
-  opacity: 1;
-  /* animation: fade 1s forwards; */
-}
-
-.modal.hide {
-  opacity: 0;
-  /* animation: fade-out 1s forwards; */
-}
-
 /* MovieInfo 컴퍼넌트 CSS*/
 .movieInfo {
   position: relative;
@@ -149,13 +116,6 @@
   z-index: 10;
 }
 
-.movieInfo__content__detail > div {
-}
-
-.movieInfo__content__detail > div > h3 {
-  /* padding: 5px 0px; */
-}
-
 .movieInfo__content__detail > div > div {
   padding: 15px 0px 15px 5px;
 }
@@ -210,37 +170,4 @@
   left: 250px;
   bottom: 6%;
   /* gap: 70px;   */
-}
-
-.modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #0a118a;
-  width: 280px;
-  height: 70px;
-  line-height: 30px;
-  /* 최상단 위치 */
-  z-index: 90;
-  /* 중앙 배치 */
-  /* top, bottom, left, right 는 브라우저 기준으로 작동한다. */
-  /* translate는 본인의 크기 기준으로 작동한다. */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 20px;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-/* 애니메이션 주면 깜빡거림... */
-.modal.show {
-  opacity: 1;
-  /* animation: fade 1s forwards; */
-}
-
-.modal.hide {
-  opacity: 0;
-  /* animation: fade-out 1s forwards; */
 }
