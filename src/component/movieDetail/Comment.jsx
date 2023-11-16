@@ -6,6 +6,7 @@ import "../../style/comment.css";
 export default function Comment() {
   const params = useParams();
   const [slicedComments, setSlicedComments] = useState(null);
+  const [userInfo, setUserInfo] = useState("");
 
   //새로운 코멘트를 받는 상태
   const [comments, setComments] = useState({
@@ -19,6 +20,34 @@ export default function Comment() {
   //모달창 열림 닫힘 상태
   const [modalOpen, setModalOpen] = useState(false);
 
+  //1. 코멘트 생성 api연결 시   2. 로그인 여부 확인
+  const accessToken = localStorage.getItem("accessToken");
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${accessToken}`, // 토큰을 Authorization 헤더에 포함
+  };
+
+  const getMyinfo = async () => {
+    await fetch(
+      `https://moviestates-alternative.codestates-seb.link/users/me`,
+      {
+        headers: headers,
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.email);
+        setUserInfo(data.email);
+      })
+      .catch((error) => console.log(error));
+  };
+  console.log(userInfo);
+
+  useEffect(() => {
+    getMyinfo();
+  }, []);
+
   useEffect(() => {
     //✅api 연결 : 코멘트 불러오기
     fetch(
@@ -27,20 +56,14 @@ export default function Comment() {
       .then((res) => res.json())
       .then((data) => {
         setSlicedComments(data);
+        console.log(slicedComments);
       })
       .catch((error) => console.log(error));
+    // }, [params.movieId, slicedComments]); //영화가 바뀔때 마다 해당 영화의 코멘트 불러오기
   }, [params.movieId]); //영화가 바뀔때 마다 해당 영화의 코멘트 불러오기
-
-  //1. 코멘트 생성 api연결 시   2. 로그인 여부 확인
-  const accessToken = localStorage.getItem("accessToken");
 
   //✅api 연결 : 로그인 시 작성 버튼 클릭 시 코멘트 생성
   const handleSubmit = async () => {
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`, // 토큰을 Authorization 헤더에 포함
-    };
-
     try {
       const response = await fetch(
         `https://moviestates-alternative.codestates-seb.link/reviews/${params.movieId}`,
@@ -145,7 +168,11 @@ export default function Comment() {
         </form>
       </div>
 
-      <CommentList slicedComments={slicedComments} />
+      <CommentList
+        slicedComments={slicedComments}
+        setSlicedComments={setSlicedComments}
+        userInfo={userInfo}
+      />
     </div>
   );
 }

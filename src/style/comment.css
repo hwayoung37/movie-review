@@ -111,6 +111,18 @@
   margin-right: 5px;
   font-size: 15px;
 }
+.commentItem_bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.commentItem_btn {
+  width: 50px;
+  border: none;
+  background-color: #242547;
+  color: white;
+  cursor: pointer;
+}
 
 .commentItem__date {
   display: flex;
