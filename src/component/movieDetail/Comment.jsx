@@ -137,7 +137,11 @@ export default function Comment() {
         <form className="commentForm">
           <textarea
             className="commentForm__input"
-            placeholder="로그인 이후 사용 가능합니다."
+            placeholder={
+              accessToken
+                ? "영화 리뷰를 작성해주세요"
+                : "로그인 후 사용가능합니다"
+            }
             value={comments.content}
             onChange={(e) =>
               setComments({ ...comments, content: e.target.value })
