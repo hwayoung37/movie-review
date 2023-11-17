@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import "../style/header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,16 +6,27 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 // 로고, 검색창, 로그인, 회원가입
 export default function Header({ accessToken, setAccessToken }) {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
+    console.log(searchTerm);
+  };
+
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      navigate(`/search/${searchTerm}`);
+      console.log("엔터");
+    }
   };
 
   const handleLogout = () => {
     // 로그아웃 클릭 시 accessToken 제거
     localStorage.removeItem("accessToken");
     setAccessToken(false);
+    setSearchTerm("");
     alert("로그아웃 되었습니다.");
   };
 
@@ -36,6 +47,7 @@ export default function Header({ accessToken, setAccessToken }) {
             placeholder="영화 제목을 입력하세요."
             value={searchTerm}
             onChange={handleInputChange}
+            onKeyPress={handleOnKeyPress}
           />
           <Link
             to={`/search/${searchTerm}`}
