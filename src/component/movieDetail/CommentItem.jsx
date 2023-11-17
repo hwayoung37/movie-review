@@ -5,9 +5,6 @@ export default function CommentItem({ comment, setSlicedComments, userInfo }) {
   const params = useParams();
   const date = comment.createdAt.slice(0, 10);
 
-  console.log(comment.id);
-  console.log(comment);
-
   const accessToken = localStorage.getItem("accessToken");
 
   const removeBtnHandler = async () => {
@@ -23,11 +20,9 @@ export default function CommentItem({ comment, setSlicedComments, userInfo }) {
         method: "DELETE",
         headers: headers,
       }
-    )
-      // .then((res) => res.json())
-      .then((res) => {
-        console.log("삭제 데이터 : ", res);
-      });
+    ).then((res) => {
+      console.log("삭제 데이터 : ", res);
+    });
 
     await fetch(
       `https://moviestates-alternative.codestates-seb.link/reviews/movie/${params.movieId}?orderBy=CREATED_AT`

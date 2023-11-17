@@ -11,14 +11,12 @@ export default function Header({ accessToken, setAccessToken }) {
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
-    console.log(searchTerm);
   };
 
   const handleOnKeyPress = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       navigate(`/search/${searchTerm}`);
-      console.log("엔터");
     }
   };
 
@@ -35,7 +33,7 @@ export default function Header({ accessToken, setAccessToken }) {
       {/* 로고 */}
       <div>
         <Link to="/">
-          <img src="/logo.png" className="header__logo" />
+          <img src="/logo.png" className="header__logo" alt="logo img" />
         </Link>
       </div>
       <div className="header__category">

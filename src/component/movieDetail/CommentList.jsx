@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
 import CommentItem from "./CommentItem";
-import { useParams } from "react-router-dom";
 import Loading from "../common/Loading";
 
 export default function CommentList({
@@ -8,8 +6,6 @@ export default function CommentList({
   slicedComments,
   setSlicedComments,
 }) {
-  console.log(slicedComments);
-
   //분기처리
   //로딩, 빈배열, 채워진 제대로된 배열
   if (slicedComments === null) {

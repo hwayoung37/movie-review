@@ -37,12 +37,10 @@ export default function Comment() {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.email);
         setUserInfo(data.email);
       })
       .catch((error) => console.log(error));
   };
-  console.log(userInfo);
 
   useEffect(() => {
     getMyinfo();
@@ -56,7 +54,6 @@ export default function Comment() {
       .then((res) => res.json())
       .then((data) => {
         setSlicedComments(data);
-        console.log(slicedComments);
       })
       .catch((error) => console.log(error));
     // }, [params.movieId, slicedComments]); //영화가 바뀔때 마다 해당 영화의 코멘트 불러오기

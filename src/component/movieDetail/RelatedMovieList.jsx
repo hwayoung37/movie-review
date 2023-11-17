@@ -23,7 +23,6 @@ export default function RelatedMovieList() {
     fetch(RELATED_API)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         setMovieList(result.slice(0, 10));
       })
       .catch((e) => console.log(e));

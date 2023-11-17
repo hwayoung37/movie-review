@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from "react";
-// import '../../App.css'; // Banner 컴포넌트에 대한 스타일 파일
 import { Link } from "react-router-dom";
-// import Loading from "./Loading";
 import "../../style/banner.css";
 
 export default function Banner() {
   const [data, setData] = useState(null);
-  // const [images, setImages] = useState([])
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
+
   //숫자 랜덤 발생
   function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   const randPage = getRandomNumber(1, 10);
   const randLimit = getRandomNumber(1, 5);
-
-  //서버 api
-  // const SERVER_API = `https://moviestates.codestates-seb.link/movies?page=${randPage}&limit=${randLimit}&sortBy=asc`
 
   const SERVER_API = `https://moviestates-alternative.codestates-seb.link/movies?page=${randPage}&limit=${randLimit}&sortBy=asc`;
 
@@ -25,9 +20,6 @@ export default function Banner() {
       .then((res) => res.json())
       .then((data) => {
         setData(data.data);
-        // 이미지 데이터 추출 및 설정
-        // const imageUrls = data.data.map(movie => movie.postImage);
-        // setImages(imageUrls);
       })
       .catch((e) => console.log(e));
   }, []);
@@ -50,7 +42,6 @@ export default function Banner() {
     }
     return text;
   }
-  // const plot = limitTextLength(movie.plot, 70);
 
   if (data === null) {
     return <div></div>;
@@ -73,7 +64,11 @@ export default function Banner() {
             </div>
 
             <div className="movie__info">
-              <img className="movie__info-image" src={movie.postImage} />
+              <img
+                className="movie__info-image"
+                src={movie.postImage}
+                alt={movie.alt}
+              />
               <div className="movie__info-text">
                 <div className="movie__title-container">
                   <h2 className="movie__title">{movie.title}</h2>

@@ -4,7 +4,6 @@ import Banner from "../component/home/Banner";
 import MovieGenresList from "../component/home/MovieGenresList";
 
 export default function Home() {
-  console.log("home page is rendering!!");
   return (
     <div>
       <Banner />
