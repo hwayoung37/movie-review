@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+# 영화 리뷰 웹사이트
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**장르별 영화를 소개하고, 로그인 후 리뷰를 남길 수 있는 웹 사이트**<br/>
+<br/>
+> 프로젝트 개발 기간 : 1주(2023.08) - 팀프로젝트<br/>
+> 리팩토링 기간 : 1주(2023.11) - 개인<br/>
+> 배포주소 : https://movie-review-project-5688b.web.app
+<br/>
 
-## Available Scripts
+## 설명
+* 장르별 영화를 소개하고, 로그인 후 리뷰를 남길 수 있는 웹 사이트 프로젝트
+* firebase로 배포
+<br/>
 
-In the project directory, you can run:
+## 주요기능 및 구현내용
+* 라우터를 사용한 싱글 페이지 어플리케이션
+* swagger api 문서를 참고하여 api 호출 작업
+* 로그인 시 accessToken을 localStorage에 저장하고, 조건부 렌더링으로 로그인 화면 출력
+* 로그인 및 회원가입 기능에서 정규표현식을 사용한 유효성 검사
+* 로그인 시 영화에 대한 리뷰를 작성할 수 있고, 내가 작성한 것만 삭제 가능
+* 영화 제목으로 검색 기능 구현
+<br/>
 
-### `npm start`
+## 문제해결
+**로그인 여부에 따른 조건부 렌더링**   
+이 프로젝트로 로그인 기능을 처음 구현했다. 로그인 요청을 하면 accessToken를 받아와서 그 token을 localStorage에 넣었고, 로그인 시 할 수 있는 기능들을 구현할 때는 localStorage의 데이터를 가져와서 사용했다. 초반에 **로그인을 했을 때 로그인 된 상태의 화면을 출력해야 하는데 계속 로그인 전의 UI가 출력이 되는 문제**가 있었다. 그래서 강제로 새로고침을 하는 `window.location.reload();` 기능을 넣었는데, 이렇게 하면 새로 html을 불러와서 깜박거리므로 리액트의 SPA를 활용하지 못하는 상황이었다. 이 문제는 **최상위 컴포넌트에서 로그인이 되었는지 확인하는** `state`**를 만들고, 이 상태가 바뀌었을 때 렌더링하도록** 해야했다. app 컴포넌트에서 localStorage라는 상태를 만들고 header컴포넌트에 localStorage를 props로 전달해줘서 localStorage가 변경되면 header가 조건부렌더링 했더니 로그인 시 UI가 정상적으로 출력되었다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+그런데 또 하나의 문제점이 발생했는데 이후에 **새로고침을 할 경우 localStorage(state가 아닌 실제 웹스토리지)에 token이 있음에도 불구하고 로그아웃 상태가 되었다.** 이것은 새로고침 시 리액트가 초기화되어 모든 것이 초기 상태로 돌아가기 때문인데 초기값을 아무것도 지정하지 않았었다. `const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));` 이렇게 **초기값을 localStorage에서 가져오도록 설정**했더니 새로고침 시에도 로그인 상태가 유지되었다.
