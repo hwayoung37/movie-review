@@ -1,11 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { RemoveAccessToken } from "../store";
+
 import "../style/header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 // 로고, 검색창, 로그인, 회원가입
-export default function Header({ accessToken, setAccessToken }) {
+export default function Header() {
+  const dispatch = useDispatch();
+  const accessToken = useSelector((state) => state.accessToken); // Redux에서 accessToken 가져오기
+
+  useEffect(() => {}, [accessToken]);
+
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -21,9 +30,8 @@ export default function Header({ accessToken, setAccessToken }) {
   };
 
   const handleLogout = () => {
-    // 로그아웃 클릭 시 accessToken 제거
-    localStorage.removeItem("accessToken");
-    setAccessToken(false);
+    // 로그아웃 클릭 시 accessToken 제거되는 작업 실행
+    dispatch(RemoveAccessToken());
     setSearchTerm("");
     alert("로그아웃 되었습니다.");
   };
@@ -56,19 +64,19 @@ export default function Header({ accessToken, setAccessToken }) {
           </Link>
         </form>
 
-        {accessToken ? (
-          <div>
-            <Link to="/" onClick={handleLogout} className="headerRight">
-              로그아웃
-            </Link>
-            <Link to="/mypage">마이페이지</Link>
-          </div>
-        ) : (
+        {accessToken === null || accessToken === undefined ? (
           <div>
             <Link to="/login" className="headerRight">
               로그인
             </Link>
             <Link to="/signup">회원가입</Link>
+          </div>
+        ) : (
+          <div>
+            <Link to="/" onClick={handleLogout} className="headerRight">
+              로그아웃
+            </Link>
+            <Link to="/mypage">마이페이지</Link>
           </div>
         )}
       </div>

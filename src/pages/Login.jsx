@@ -2,7 +2,11 @@ import "../Login.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function LogIn({ setAccessToken }) {
+import { useDispatch } from "react-redux";
+import { AddAccessToken } from "../store";
+
+export default function LogIn() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [emailId, setEmailId] = useState("");
@@ -78,7 +82,7 @@ export default function LogIn({ setAccessToken }) {
 
         // 토큰 저장
         localStorage.setItem("accessToken", data.accessToken);
-        setAccessToken(localStorage.getItem("accessToken"));
+        dispatch(AddAccessToken());
         navigate("/"); // 홈 화면 경로로 이동
       } else {
         // 로그인 실패
