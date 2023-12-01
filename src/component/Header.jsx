@@ -40,7 +40,7 @@ export default function Header() {
     <div className="header">
       {/* 로고 */}
       <div>
-        <Link to="/">
+        <Link to="/" onClick={() => setSearchTerm("")}>
           <img src="/logo.png" className="header__logo" alt="logo img" />
         </Link>
       </div>
