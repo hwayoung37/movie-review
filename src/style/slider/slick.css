@@ -25,6 +25,8 @@
 
   margin: 0;
   padding: 0;
+
+  /* margin: 0 30px; */
 }
 .slick-list:focus {
   outline: none;
@@ -71,6 +73,8 @@
 
   height: 100%;
   min-height: 1px;
+
+  padding: 0 10px;
 }
 [dir="rtl"] .slick-slide {
   float: right;

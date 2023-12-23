@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Slider from "react-slick";
 
 import "../../style/slider/slick.css";
@@ -32,6 +32,7 @@ export default function GenresSlider({ genreIds }) {
     slidesToScroll: 5,
     initialSlide: 0,
     arrow: true,
+    draggable: false,
     responsive: [
       {
         breakpoint: 1024,
