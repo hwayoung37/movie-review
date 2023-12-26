@@ -1,17 +1,9 @@
 .movieList {
   margin-top: 10px;
   margin-bottom: 50px;
-  /* padding: 20px; */
 }
 
 .movieList_content {
-  /* display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: space-between; */
-  /* border: 2px solid yellow; */
-  /* margin: px; */
-
   /* 그리드 */
   display: grid;
   grid-template-columns: repeat(5, 1fr);

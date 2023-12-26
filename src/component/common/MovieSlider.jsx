@@ -1,28 +1,43 @@
-import React, { useCallback } from "react";
-import Slider from "react-slick";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
+import Slider from "react-slick";
 import "../../style/slider/slick.css";
 import "../../style/slider/slick-theme.css";
 
-import { useState, useEffect } from "react";
 import MovieItem from "../common/MovieItem";
 
-export default function GenresSlider({ genreIds }) {
+export default function MovieSlider({ genreIds }) {
   //movielist 설정 및 초기화
   const [movieList, setMovieList] = useState([]);
 
+  const params = useParams();
+
   const SERVER_API = `https://moviestates-alternative.codestates-seb.link/movies/genre?page=1&limit=10&genreIds=${genreIds}`;
+  const RELATED_API = `https://moviestates-alternative.codestates-seb.link/movies/${params.movieId}/related`;
 
   useEffect(() => {
-    fetch(SERVER_API)
-      .then((response) => response.json())
-      .then((result) => {
-        // const result = await response.json();
-        const res = result.data;
-        setMovieList(res);
-      })
-      .catch((e) => console.log(e));
+    if (genreIds) {
+      fetch(SERVER_API)
+        .then((response) => response.json())
+        .then((result) => {
+          const res = result.data;
+          setMovieList(res);
+          console.log("genreIds:", genreIds);
+        })
+        .catch((e) => console.log(e));
+    } else if (params.movieId) {
+      fetch(RELATED_API)
+        .then((response) => response.json())
+        .then((result) => {
+          console.log("result:", result);
+          const res = result.slice(0, 10);
+          setMovieList(res);
+        })
+        .catch((e) => console.log(e));
+    }
   }, []);
+  console.log("movieList:", movieList);
 
   var settings = {
     dots: true,
@@ -63,11 +78,9 @@ export default function GenresSlider({ genreIds }) {
   return (
     <div>
       <Slider {...settings}>
-        {/* <div className="movieList__slider"> */}
         {movieList.map((movie) => (
           <MovieItem type={"slider"} movie={movie} key={movie.id} />
         ))}
-        {/* </div> */}
       </Slider>
     </div>
   );

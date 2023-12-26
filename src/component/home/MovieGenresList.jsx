@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import GenresSlider from "./GenresSlider";
-import "../../style/common/movieList.css";
+import MovieSlider from "../common/MovieSlider";
+import Loading from "../common/Loading";
 
 export default function MovieGenresList({ genreIds, categoryTitle }) {
   //movielist 설정 및 초기화
@@ -18,12 +18,16 @@ export default function MovieGenresList({ genreIds, categoryTitle }) {
   }, []);
 
   if (movieList === null) {
-    return <div></div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   } else {
     return (
       <div className="movieList">
         <h2 className="genreTitle">{categoryTitle}</h2>
-        <GenresSlider genreIds={genreIds} />
+        <MovieSlider genreIds={genreIds} />
       </div>
     );
   }

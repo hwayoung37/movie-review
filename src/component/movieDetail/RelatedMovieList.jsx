@@ -1,14 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import MovieItem from "../common/MovieItem";
+import MovieSlider from "../common/MovieSlider";
 import Loading from "../common/Loading";
-import "../../style/common/slider.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
 
 export default function RelatedMovieList() {
   //movielist 설정 및 초기화
@@ -16,8 +10,6 @@ export default function RelatedMovieList() {
 
   const params = useParams();
   const RELATED_API = `https://moviestates-alternative.codestates-seb.link/movies/${params.movieId}/related`;
-
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     fetch(RELATED_API)
@@ -28,16 +20,6 @@ export default function RelatedMovieList() {
       .catch((e) => console.log(e));
   }, []);
 
-  const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
-
-  const handleNextClick = () => {
-    setCurrentIndex((prevIndex) =>
-      Math.min(prevIndex + 1, movieList.length - 1)
-    );
-  };
-
   if (movieList === null) {
     return (
       <div>
@@ -46,34 +28,9 @@ export default function RelatedMovieList() {
     );
   } else {
     return (
-      <div className="movieList">
+      <div className="relatedMovieList">
         <h2 className="genreTitle">연관된영화</h2>
-        <div className="slider__container">
-          <button
-            className="slider__btn"
-            onClick={handlePrevClick}
-            disabled={currentIndex === 0}
-          >
-            <FontAwesomeIcon icon={faChevronLeft} />
-          </button>
-          <div className="movieList__content__slider__related">
-            <div
-              className="movieList__slider"
-              style={{ transform: `translateX(-${currentIndex * 188}px)` }}
-            >
-              {movieList.map((movie) => (
-                <MovieItem type={"slider"} movie={movie} key={movie.id} />
-              ))}
-            </div>
-          </div>
-          <button
-            className="slider__btn"
-            onClick={handleNextClick}
-            disabled={currentIndex === movieList.length - 7}
-          >
-            <FontAwesomeIcon icon={faChevronRight} />
-          </button>
-        </div>
+        <MovieSlider />
       </div>
     );
   }
